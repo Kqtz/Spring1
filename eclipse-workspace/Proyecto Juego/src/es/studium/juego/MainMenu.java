@@ -22,7 +22,6 @@ public class MainMenu extends JFrame {
     public MainMenu() {
         dbManager = new DatabaseManager();
 
-        // Cargar la imagen de fondo y reducir su tamaño a 1/3
         ImageIcon bgIcon = new ImageIcon(getClass().getClassLoader().getResource("resources/MenuPrincipal.png"));
 
         if (bgIcon.getIconWidth() <= 0) {
@@ -44,60 +43,56 @@ public class MainMenu extends JFrame {
         setResizable(false);
         setLayout(null);
 
-        // Panel de fondo con imagen escalada
         BackgroundPanel backgroundPanel = new BackgroundPanel("resources/MenuPrincipal.png", windowWidth, windowHeight);
         backgroundPanel.setBounds(0, 0, windowWidth, windowHeight);
-        // Usamos GridBagLayout para posicionar el panel de botones
         backgroundPanel.setLayout(new GridBagLayout());
         add(backgroundPanel);
 
-        // Tamaño de los botones
         int buttonWidth = 200;
         int buttonHeight = 70;
 
-        // Crear botones
+
         nuevaPartidaButton = createButton("nuevapartida.png", buttonWidth, buttonHeight);
         rankingButton = createButton("ranking.png", buttonWidth, buttonHeight);
         ayudaButton = createButton("ayuda.png", buttonWidth, buttonHeight);
 
-        // Panel para organizar los botones en vertical
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setOpaque(false); // Para que se vea el fondo
+        buttonPanel.setOpaque(false); 
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         
-        // Alinear los botones en el centro del panel vertical
+
         nuevaPartidaButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         rankingButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         ayudaButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        // Añadir botones y espaciadores verticales
+
         buttonPanel.add(nuevaPartidaButton);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         buttonPanel.add(rankingButton);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         buttonPanel.add(ayudaButton);
 
-        // Configurar GridBagConstraints para alinear el panel de botones en la esquina superior derecha
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.NORTHEAST; // Ancla en la esquina superior derecha
-        gbc.insets = new Insets(40, 40, 40, 40); // Márgenes desde los bordes
+        gbc.anchor = GridBagConstraints.NORTHEAST; 
+        gbc.insets = new Insets(40, 40, 40, 40); 
         backgroundPanel.add(buttonPanel, gbc);
 
-        // Acciones de los botones
+
         nuevaPartidaButton.addActionListener(e -> startNewGame());
         rankingButton.addActionListener(e -> openRanking());
         ayudaButton.addActionListener(e -> openHelp());
 
-        // Iniciar la música del menú solo si no está sonando
+
         if (clip == null || !clip.isRunning()) {
             playMusic("resources/music.wav");
         }
 
-        // Habilitar control por teclado
+
         setFocusable(true);
         requestFocus();
         addKeyListener(new KeyAdapter() {
@@ -120,7 +115,7 @@ public class MainMenu extends JFrame {
         setVisible(true);
     }
 
-    // Método para crear botones con imágenes escaladas correctamente
+
     private JButton createButton(String imageName, int width, int height) {
         JButton button = new JButton();
         try {
@@ -140,7 +135,7 @@ public class MainMenu extends JFrame {
         return button;
     }
 
-    // Método para iniciar nueva partida
+
     private void startNewGame() {
         String playerName = JOptionPane.showInputDialog(this, "Introduce tu nombre:");
         if (playerName != null && !playerName.trim().isEmpty()) {
@@ -151,17 +146,17 @@ public class MainMenu extends JFrame {
         }
     }
 
-    // Método para abrir Ranking
+
     private void openRanking() {
         new TopScoresWindow(dbManager);
     }
 
-    // Método para abrir Ayuda
+
     private void openHelp() {
         new HelpWindow();
     }
 
-    // Método para reproducir música del menú con volumen al 40%
+
     private static void playMusic(String musicPath) {
         try {
             URL url = MainMenu.class.getClassLoader().getResource(musicPath);
@@ -174,7 +169,7 @@ public class MainMenu extends JFrame {
             clip.open(audioIn);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
 
-            // Configurar control de volumen
+
             volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             setVolume(VOLUME_LEVEL);
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
@@ -188,7 +183,7 @@ public class MainMenu extends JFrame {
         }
     }
 
-    // Método para establecer el volumen inicial al 40%
+
     private static void setVolume(float volume) {
         if (volumeControl != null) {
             float min = volumeControl.getMinimum();
@@ -197,7 +192,7 @@ public class MainMenu extends JFrame {
         }
     }
 
-    // Método principal para ejecutar la aplicación
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new MainMenu());
     }

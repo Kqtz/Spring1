@@ -9,7 +9,7 @@ public class HelpWindow extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         
-        // Se utiliza un JEditorPane con contenido HTML para mejorar la presentación
+
         JEditorPane helpText = new JEditorPane();
         helpText.setContentType("text/html");
         helpText.setEditable(false);
@@ -61,7 +61,7 @@ public class HelpWindow extends JFrame {
             "</html>"
         );
         
-        // Asegurarse de que el scroll se posicione al principio
+
         helpText.setCaretPosition(0);
         
         JScrollPane scrollPane = new JScrollPane(helpText);

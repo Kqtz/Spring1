@@ -7,7 +7,7 @@ import java.net.URL;
 public class MusicPlayer {
     private Clip clip;
     private FloatControl volumeControl;
-    private float volume = 0.5f; // Volumen inicial al 50%
+    private float volume = 0.5f; 
 
     public MusicPlayer(String filePath) {
         try {

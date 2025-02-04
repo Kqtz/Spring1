@@ -7,10 +7,8 @@ public class DatabaseManager {
     private Connection conn;
     
     public DatabaseManager() {
-        try {
-            // Cargar el driver JDBC de SQLite (asegúrate de tener sqlite-jdbc.jar en el classpath)
+        try {        
             Class.forName("org.sqlite.JDBC");
-            // Se conecta a la base de datos; si el archivo no existe se crea
             conn = DriverManager.getConnection("jdbc:sqlite:Papeltijerajuegorecu.db");
             createTable();
         } catch (Exception e) {

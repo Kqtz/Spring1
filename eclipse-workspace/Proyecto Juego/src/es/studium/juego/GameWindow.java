@@ -10,7 +10,7 @@ public class GameWindow extends JFrame {
     private MusicPlayer musicPlayer;
     private DatabaseManager dbManager;
     private int score = 0;
-    private int lives = 6; // 6 medios corazones (3 completos)
+    private int lives = 6; 
 
     private JLabel scoreLabel;
     private JLabel aiChoiceLabel;
@@ -18,9 +18,7 @@ public class GameWindow extends JFrame {
     private JPanel livesPanel;
 
     private Random random = new Random();
-    // Variable para controlar que el mensaje inicial se muestre solo la primera vez
     private boolean firstRound = true;
-    // Variable para evitar que el jugador inicie otra ronda mientras se procesa la actual
     private boolean roundInProgress = false;
 
     public GameWindow(String playerName, DatabaseManager dbManager) {
@@ -33,20 +31,18 @@ public class GameWindow extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setLayout(new BorderLayout());
-
-        // 🎯 Panel superior con puntuación y corazones
+        
         JPanel topPanel = new JPanel(new BorderLayout());
         scoreLabel = new JLabel("Puntuación: 0", SwingConstants.CENTER);
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 24));
         topPanel.add(scoreLabel, BorderLayout.NORTH);
-
-        // 💖 Panel de vidas (corazones)
+        
         livesPanel = new JPanel(new FlowLayout());
         updateLivesDisplay();
         topPanel.add(livesPanel, BorderLayout.CENTER);
         add(topPanel, BorderLayout.NORTH);
 
-        // 🎮 Panel de botones de elección
+
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         JButton piedraButton = createImageButton("piedra.png");
         JButton papelButton = createImageButton("papel.png");
@@ -57,10 +53,10 @@ public class GameWindow extends JFrame {
         buttonsPanel.add(tijeraButton);
         add(buttonsPanel, BorderLayout.CENTER);
 
-        // 📜 Panel de resultado y elección de la IA
+
         JPanel resultPanel = new JPanel(new BorderLayout());
         aiChoiceLabel = new JLabel("", SwingConstants.CENTER);
-        // El mensaje por defecto se muestra solo la primera vez
+
         resultLabel = new JLabel("¡Elige qué vas a usar!", SwingConstants.CENTER);
         resultLabel.setFont(new Font("Serif", Font.BOLD, 40));
 
@@ -68,12 +64,12 @@ public class GameWindow extends JFrame {
         resultPanel.add(resultLabel, BorderLayout.CENTER);
         add(resultPanel, BorderLayout.SOUTH);
 
-        // 🎮 Acciones de los botones
+
         piedraButton.addActionListener(e -> playRound("Piedra"));
         papelButton.addActionListener(e -> playRound("Papel"));
         tijeraButton.addActionListener(e -> playRound("Tijeras"));
 
-        // ⌨ Manejo por teclado
+
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -97,7 +93,7 @@ public class GameWindow extends JFrame {
         setVisible(true);
     }
 
-    // 🎨 Método para crear botones con imágenes
+
     private JButton createImageButton(String imageName) {
         JButton button = new JButton();
         try {
@@ -113,19 +109,19 @@ public class GameWindow extends JFrame {
         return button;
     }
 
-    // 🔄 Método para jugar una ronda
+
     private void playRound(String playerMove) {
-        // Si ya hay una ronda en curso, se ignora la petición
+
         if (roundInProgress) {
             return;
         }
         roundInProgress = true;
         
-        // Si no es la primera vez, durante la animación se muestra "..."
+
         if (!firstRound) {
             resultLabel.setText("...");
         }
-        // Tras la primera jugada, ya no se muestra el mensaje inicial
+
         firstRound = false;
 
         String computerMove = getComputerMove();
@@ -143,9 +139,9 @@ public class GameWindow extends JFrame {
                     aiAnimationTimer.stop();
                     aiChoiceLabel.setIcon(loadScaledImage(computerMove.toLowerCase() + ".png", 120, 120));
 
-                    // 🏆 Actualizar puntaje y vidas después de la animación
+
                     SwingUtilities.invokeLater(() -> updateGameStatus(playerMove, computerMove));
-                    // Permitir iniciar una nueva ronda
+
                     roundInProgress = false;
                 }
             }
@@ -163,26 +159,26 @@ public class GameWindow extends JFrame {
                    (playerMove.equals("Tijeras") && computerMove.equals("Papel"))) {
             result = "Ganaste!";
             score++;
-            SoundEffects.playSound("win.wav"); // 🔊 Sonido de victoria
+            SoundEffects.playSound("win.wav"); 
         } else {
             result = "Perdiste...";
             lives--;
-            SoundEffects.playSound("lose.wav"); // 🔊 Sonido de derrota
+            SoundEffects.playSound("lose.wav"); 
         }
 
-        // 📊 Actualizar la interfaz tras la animación
+
         scoreLabel.setText("Puntuación: " + score);
         resultLabel.setText(result);
         updateLivesDisplay();
 
-        // ❌ Si se quedan sin corazones, termina el juego
+
         if (lives <= 0) {
             JOptionPane.showMessageDialog(this, "¡Has perdido todas tus vidas! Juego terminado.");
             endGame();
         }
     }
 
-    // 🎲 Método para que la IA elija su jugada
+
     private String getComputerMove() {
         int move = random.nextInt(3);
         switch (move) {
@@ -193,7 +189,7 @@ public class GameWindow extends JFrame {
         }
     }
 
-    // ❤️ Método para actualizar la visualización de las vidas
+
     private void updateLivesDisplay() {
         livesPanel.removeAll();
 
@@ -208,7 +204,7 @@ public class GameWindow extends JFrame {
         livesPanel.repaint();
     }
 
-    // 📷 Método para cargar imágenes escaladas
+
     private ImageIcon loadScaledImage(String imageName, int width, int height) {
         try {
             String path = "resources/" + imageName;
