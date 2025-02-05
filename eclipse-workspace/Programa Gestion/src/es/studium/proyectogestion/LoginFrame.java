@@ -12,7 +12,6 @@ public class LoginFrame extends JFrame {
     private UsuarioDAO usuarioDAO;
 
     public LoginFrame() {
-        // Configura Nimbus LookAndFeel
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (Exception e) {
@@ -26,10 +25,10 @@ public class LoginFrame extends JFrame {
         usuarioDAO = new UsuarioDAO();
 
         JPanel panel = new JPanel();
-        panel.setBackground(new Color(245, 245, 245)); // Color de fondo
+        panel.setBackground(new Color(245, 245, 245)); 
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(12, 12, 12, 12); // Mayor espacio entre elementos
+        gbc.insets = new Insets(12, 12, 12, 12); 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         
         JLabel lblUsername = new JLabel("Usuario:");
@@ -40,7 +39,7 @@ public class LoginFrame extends JFrame {
         panel.add(lblUsername, gbc);
         
         txtUsername = new JTextField();
-        txtUsername.setPreferredSize(new Dimension(200, 35)); // Aumentamos la altura
+        txtUsername.setPreferredSize(new Dimension(200, 35)); 
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.CENTER;
@@ -54,18 +53,18 @@ public class LoginFrame extends JFrame {
         panel.add(lblPassword, gbc);
         
         txtPassword = new JPasswordField();
-        txtPassword.setPreferredSize(new Dimension(200, 35)); // Aumentamos la altura
+        txtPassword.setPreferredSize(new Dimension(200, 35));
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.CENTER;
         panel.add(txtPassword, gbc);
         
         btnLogin = new JButton("Iniciar Sesión");
-        btnLogin.setBackground(new Color(70, 130, 180)); // Azul acero
+        btnLogin.setBackground(new Color(70, 130, 180));
         btnLogin.setForeground(Color.WHITE);
         btnLogin.setFont(new Font("SansSerif", Font.BOLD, 14));
         btnLogin.setFocusPainted(false);
-        btnLogin.setPreferredSize(new Dimension(50, 40)); // Botón más grande
+        btnLogin.setPreferredSize(new Dimension(50, 40)); 
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 2;

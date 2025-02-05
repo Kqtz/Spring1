@@ -14,9 +14,9 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Configuración de la barra de menús
+
         JMenuBar menuBar = new JMenuBar();
-        menuBar.setBackground(new Color(240, 248, 255)); // Fondo azul claro
+        menuBar.setBackground(new Color(240, 248, 255)); 
         menuBar.setFont(new Font("SansSerif", Font.BOLD, 14));
 
         // Menú Clientes
@@ -46,7 +46,7 @@ public class MainFrame extends JFrame {
         }
         menuBar.add(menuClientes);
 
-        // Menú Productos
+
         JMenu menuProductos = new JMenu("Productos");
         customizeMenu(menuProductos);
         JMenuItem miAltaProducto = new JMenuItem("Alta Producto");
@@ -103,15 +103,15 @@ public class MainFrame extends JFrame {
         setJMenuBar(menuBar);
     }
 
-    // Métodos para personalizar menús
+
     private void customizeMenu(JMenu menu) {
-        menu.setForeground(new Color(70, 130, 180)); // Azul acero
+        menu.setForeground(new Color(70, 130, 180)); 
         menu.setFont(new Font("SansSerif", Font.BOLD, 14));
     }
 
     private void customizeMenuItem(JMenuItem item) {
-        item.setBackground(new Color(240, 248, 255)); // Fondo azul muy claro
-        item.setForeground(new Color(70, 130, 180)); // Texto azul acero
+        item.setBackground(new Color(240, 248, 255)); 
+        item.setForeground(new Color(70, 130, 180));
         item.setFont(new Font("SansSerif", Font.PLAIN, 14));
     }
 }

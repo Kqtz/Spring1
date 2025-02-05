@@ -3,7 +3,7 @@ package es.studium.proyectogestion;
 public class Usuario {
     private int id;
     private String username;
-    private String password; // En un entorno real se debe almacenar encriptada
+    private String password; 
     private String role;     // "admin" o "basico"
 
     public Usuario() {}

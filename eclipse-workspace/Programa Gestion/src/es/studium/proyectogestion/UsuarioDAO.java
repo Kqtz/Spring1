@@ -8,7 +8,7 @@ import java.util.List;
 
 public class UsuarioDAO {
 
-    // Validación de login (para este ejemplo, se asume que la contraseña no está encriptada)
+
     public Usuario login(String username, String password) {
         Usuario usuario = null;
         String sql = "SELECT * FROM usuarios WHERE username = ? AND password = ?";
